@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2nd-kibo.iml" filepath="$PROJECT_DIR$/.idea/modules/2nd-kibo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/2nd-kibo.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/2nd-kibo.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/guest_science_library/2nd-kibo.guest_science_library.iml" filepath="$PROJECT_DIR$/.idea/modules/guest_science_library/2nd-kibo.guest_science_library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kibo_rpc_api/2nd-kibo.kibo_rpc_api.iml" filepath="$PROJECT_DIR$/.idea/modules/kibo_rpc_api/2nd-kibo.kibo_rpc_api.iml" />
+    </modules>
+  </component>
+</project>
