@@ -62,46 +62,38 @@ public class YourService extends KiboRpcService {
         api.startMission();
 
         // TODO: Move astrobee to point-A
-        Log.d("Move[status]:","point-A | starting...");
+        Log.d("Move[status]","point-A | starting...");
         moveToWrapper(11.21, -9.8, 4.79, 0, 0, -0.707, 0.707);
-        Log.d("Move[status]:","point-A | finished...");
+        Log.d("Position","" + api.getRobotKinematics());
+        Log.d("Move[status]","point-A | finished...");
 
         // TODO: Read QR
         Mat image = api.getMatNavCam();
-        String content = null;
-        try {
-            content = readQR(image);
-        } catch (ChecksumException e) {
-            e.printStackTrace();
-        } catch (FormatException e) {
-            e.printStackTrace();
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Log.d("QR[data]:", content);
+        String content = readQR(image);
+//        String content = "{\"p\":2,\"x\":11.09,\"y\":-9.80,\"z\":5.24}";
+        Log.d("QR[data]", content);
 
         // Fixed pattern2 {"p":2,"x":11.09,"y":-9.80,"z":5.24}
 
          api.sendDiscoveredQR(content);
 
         // TODO: Move astrobee to point-A'
-        Log.d("Move[status]:","point-A\' | starting...");
+        Log.d("Move[status]","point-A\' | starting...");
         moveToWrapper(11.09, -9.8, 5.24, 0, 0, -0.707, 0.707);
-        Log.d("Move[status]:","point-A\' | finished...");
+        Log.d("Move[status]","point-A\' | finished...");
 
         // TODO: Rotate
 
         // TODO: Irradiate the laser
         api.laserControl(true);
-        Log.d("Laser[status]:","Irradiating...");
+        Log.d("Laser[status]","Irradiating...");
 
         // take snapshots
         // api.takeSnapshot();
 
         // irradiate the laser
         api.laserControl(true);
-        Log.d("Laser[status]:","finished...");
+        Log.d("Laser[status]","finished...");
 
 
         // TODO: Move astrobee from point-A' to aside KOZ_2
@@ -173,7 +165,7 @@ public class YourService extends KiboRpcService {
     // ! Moving <End>
 
     // ! QR Code Method
-    public String readQR(Mat qr_image) throws ChecksumException, FormatException, NotFoundException {
+    public String readQR(Mat qr_image) {
         findRectContours(qr_image);
         String qr_info = decodeQRCode(sharpenImg);
         return qr_info;
@@ -305,7 +297,7 @@ public class YourService extends KiboRpcService {
     // ! zxingQRreader
 
 
-    public String decodeQRCode(Mat img) throws ChecksumException, FormatException {
+    public String decodeQRCode(Mat img) {
 
         Bitmap bMap2 = Bitmap.createBitmap(img.width(),img.height(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(img, bMap2);
@@ -319,9 +311,14 @@ public class YourService extends KiboRpcService {
             com.google.zxing.Result result = new QRCodeReader().decode(bitmap2);
             return result.getText();
         } catch (NotFoundException e) {
-            System.out.println("There is no QR code in the image");
+            Log.d("QR[status]","There is no QR code in the image");
             return null;
+        } catch (FormatException e) {
+            e.printStackTrace();
+        } catch (ChecksumException e) {
+            e.printStackTrace();
         }
+        return null;
     }
     // ! zxingQRreader <End>
 }

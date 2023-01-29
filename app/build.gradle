@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "jp.jaxa.iss.kibo.rpc.sampleapk" +
                 ""
         minSdkVersion 25
-        targetSdkVersion 30
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -35,22 +35,19 @@ android {
 }
 
 dependencies {
-    implementation project(':guest_science_library')
-    implementation project(':kibo_rpc_api')
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:26.+'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation('org.ros.rosjava_core:rosjava:[0.2,0.3)') {
+    compile project(':guest_science_library')
+    compile project(':kibo_rpc_api')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile('org.ros.rosjava_core:rosjava:[0.2,0.3)') {
         exclude group: 'xml-apis'
         exclude group: 'junit'
     }
-    implementation('org.ros.android_core:android_10:[0.2,0.3)') {
+    compile('org.ros.android_core:android_10:[0.2,0.3)') {
         exclude group: 'xml-apis'
         exclude group: 'junit'
     }
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.quickbirdstudios:opencv:3.4.4-contrib'
-    implementation 'com.google.zxing:core:3.3.0'
-    implementation 'com.google.zxing:javase:3.3.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.quickbirdstudios:opencv:3.4.4-contrib'
 }
